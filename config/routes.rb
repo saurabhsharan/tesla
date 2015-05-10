@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  root 'contractors#index'
+  post 'contractors/login' => 'contractors#login', as: :contractor_login
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
