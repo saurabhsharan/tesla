@@ -4,6 +4,7 @@ namespace :voters do
   # Run with `rake import_voters_csv`
   # This command is 'safe' to run multiple times since it doesn't delete/overwrite any data that contractors have entered in (since that data is stored in another table alltogether)
   task :import_csv, [:count]  => [:environment] do |t, args|
+    # TODO(saurabh): be able to provide voters csv file name as argument
     unless File.exist?('lib/tasks/2016_Likely_Voters.csv')
       puts "ERROR: Could not find 2016_Likely_Voters.csv in lib/tasks - remember that this file is NOT checked into version control, so you will have to manually copy the file yourself"
       next # breaks out of current task do/end block
