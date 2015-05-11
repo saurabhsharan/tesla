@@ -4,6 +4,6 @@ Completed <b><%= @completed_voter_infos.count %></b> out of <b><%= @all_voter_in
 
 <% for vgi in @all_voter_infos %>
   <p>
-    <%= vgi.voter.full_name %> - <%= vgi.voter.address %> - <%= vgi.email || "Email not entered yet" %>
+    <%= link_to vgi.voter.full_name, view_voter_path(vgi.voter.id) %> - <%= vgi.voter.address %> - <%= vgi.email || "Email not entered yet" %>
   </p>
 <% end %>

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   
   get 'admin' => 'admin#index'
   get 'admin/contractors/:contractor_id' => 'admin#view_contractor', as: :view_contractor
+  get 'admin/voters/:voter_id' => 'admin#view_voter', as: :view_voter
   post 'admin/login' => 'admin#login', as: :admin_login
   post 'admin/create_contractor' => 'admin#create_contractor', as: :create_contractor
 

@@ -1,0 +1,29 @@
+<h1><%= @voter.full_name %></h1>
+
+<h3><%= @voter.address %></h3>
+
+<% if @email_to_contractors.keys.length > 0 %>
+  <h4>Emails:</h4>
+
+  <% if @email_to_contractors.length > 1 %>
+    <h4><span style="color: red;">More than 1 unique email</span></h4>
+  <% end %>
+
+  <% for email in @email_to_contractors.keys %>
+    <p>
+      <%# TODO(saurabh): this is a mess %>
+      <%= email %> (Added by 
+      <% for c in @email_to_contractors[email] %>
+        <%= link_to c.full_name, view_contractor_path(c.id) %>,
+      <% end %>)
+    </p>
+  <% end %>
+<% end %>
+
+<% if @waiting_on_contractors.length > 0 %>
+  <h4>Waiting on contractors to enter email:</h4>
+
+  <% for contractor in @waiting_on_contractors %>
+    <p><%= link_to contractor.full_name, view_contractor_path(contractor.id) %></p>
+  <% end %>
+<% end %>

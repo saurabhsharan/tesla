@@ -63,6 +63,25 @@ class AdminController < ApplicationController
     end
   end
 
+  def view_voter
+    @voter = Voter.where(id: params[:voter_id]).first
+    vgis = @voter.voter_gathered_infos
+    @email_to_contractors = {}
+    @waiting_on_contractors = []
+    for vgi in vgis
+      unless vgi.email
+        @waiting_on_contractors.push(vgi.contractor)
+        next
+      end
+
+      unless @email_to_contractors.has_key?(vgi.email)
+        @email_to_contractors[vgi.email] = []
+      end
+
+      @email_to_contractors[vgi.email].push(vgi.contractor)
+    end
+  end
+
   private
 
     def check_admin
