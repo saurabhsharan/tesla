@@ -1,1 +1,9 @@
 <h2><%= @contractor.full_name %> (<%= @contractor.email %>)</h2>
+
+Completed <b><%= @completed_voter_infos.count %></b> out of <b><%= @all_voter_infos.count %></b>
+
+<% for vgi in @all_voter_infos %>
+  <p>
+    <%= vgi.voter.full_name %> - <%= vgi.voter.address %> - <%= vgi.email || "Email not entered yet" %>
+  </p>
+<% end %>

@@ -29,6 +29,8 @@ class AdminController < ApplicationController
       flash[:error] = "Could not find contractor with ID #{params[:contractor_id]}"
     else
       @contractor = @contractor.first
+      @all_voter_infos = @contractor.voter_gathered_infos
+      @completed_voter_infos = @all_voter_infos.where.not(email: nil)
     end
   end
 
@@ -43,6 +45,7 @@ class AdminController < ApplicationController
 
     if contractor.save
       # TODO(saurabh): move logic for generating random voters to VoterGatheredInfo model?
+      # TODO(saurabh): don't include voters that we already have an email for in the original CSV file
       num_voters = params[:num_voters].to_i
       voter_ids = Voter.pluck(:id).shuffle[0..(num_voters-1)]
 
