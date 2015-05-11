@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   post 'contractors/login' => 'contractors#login', as: :contractor_login
   
   get 'admin' => 'admin#index'
+  get 'admin/contractors/:contractor_id' => 'admin#view_contractor', as: :view_contractor
   post 'admin/login' => 'admin#login', as: :admin_login
   post 'admin/create_contractor' => 'admin#create_contractor', as: :create_contractor
 

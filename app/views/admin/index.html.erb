@@ -2,7 +2,7 @@
 
 <% for contractor in @contractors %>
   <p>
-    <%= contractor.full_name %> (<%= contractor.email %> - <%= contractor.password %>)
+    <%= link_to "#{contractor.full_name} (#{contractor.email} - #{contractor.password})", view_contractor_path(contractor.id) %>
   </p>
 <% end %>
 
@@ -19,6 +19,11 @@
   <p>
     <%= label_tag(:email, "Email") %>
     <%= text_field_tag(:email) %>
+  </p>
+  
+  <p>
+    <%= label_tag(:num_voters, "Number of Voters") %>
+    <%= text_field_tag(:num_voters) %>
   </p>
 
   <p>

@@ -1,5 +1,7 @@
-<h1>Hello!</h1>
+<h2><%= @contractor.full_name %> (<%= @contractor.email %>)</h2>
 
-<h3><%= @contractor.full_name %></h3>
+<h4>Please fill in information for the following voters:</h4>
 
-<%= @contractor.email %>
+<% for voter in @contractor.voters %>
+  <p><%= voter.full_name %> - <%= voter.address %></p>
+<% end %>
