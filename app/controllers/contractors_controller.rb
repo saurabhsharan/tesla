@@ -1,7 +1,15 @@
 class ContractorsController < ApplicationController
   def index
     if session[:contractor_id]
-      @contractor = Contractor.where(id: session[:contractor_id]).first
+      @contractor = Contractor.where(id: session[:contractor_id])
+      
+      if @contractor.empty?
+        # invalid/non-existent contractor_id
+        session[:contractor_id] = nil
+        render :login
+      else
+        @contractor = @contractor.first
+      end
     else
       render :login
     end
