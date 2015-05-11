@@ -2,7 +2,7 @@
 
 <h4>Please fill in information for the following voters</h4>
 
-<% for vgi in @contractor.voter_gathered_infos.order(:id) %>
+<% for vgi in @contractor.voter_gathered_infos.order(:voter_id) %>
   <%= form_tag(update_voter_info_path(vgi_id: vgi.id), method: 'post', remote: true) do %>
     <p>
       <%= vgi.voter.full_name %> - <%= vgi.voter.address %>

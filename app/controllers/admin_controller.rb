@@ -29,7 +29,7 @@ class AdminController < ApplicationController
       flash[:error] = "Could not find contractor with ID #{params[:contractor_id]}"
     else
       @contractor = @contractor.first
-      @all_voter_infos = @contractor.voter_gathered_infos
+      @all_voter_infos = @contractor.voter_gathered_infos.order(:voter_id)
       @completed_voter_infos = @all_voter_infos.where.not(email: nil)
     end
   end
