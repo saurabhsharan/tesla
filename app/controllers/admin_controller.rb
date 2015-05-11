@@ -22,6 +22,16 @@ class AdminController < ApplicationController
     end
   end
   
+  def view_contractor
+    @contractor = Contractor.where(id: params[:contractor_id])
+    
+    if @contractor.empty?
+      flash[:error] = "Could not find contractor with ID #{params[:contractor_id]}"
+    else
+      @contractor = @contractor.first
+    end
+  end
+  
   def create_contractor
     contractor = Contractor.new
     contractor.full_name = params[:full_name]
@@ -30,6 +40,16 @@ class AdminController < ApplicationController
     contractor.password = rand(36**10).to_s(36)
     
     if contractor.save
+      num_voters = params[:num_voters].to_i
+      voter_ids = Voter.pluck(:id).shuffle[0..(num_voters-1)]
+      
+      for voter_id in voter_ids
+        vgi = VoterGatheredInfo.new
+        vgi.voter_id = voter_id
+        vgi.contractor_id = contractor.id
+        vgi.save
+      end
+      
       redirect_to action: :index
     else
       flash[:create_contractor_error] = "Contractor with email #{params[:email]} already exists"
@@ -39,11 +59,11 @@ class AdminController < ApplicationController
   
   private
   
-  def check_admin
-    if session[:admin_id]
-      @admin = Admin.where(id: session[:admin_id]).first
-    else
-      render status: :unauthorized
+    def check_admin
+      if session[:admin_id]
+        @admin = Admin.where(id: session[:admin_id]).first
+      else
+        render status: :unauthorized
+      end
     end
-  end
 end
