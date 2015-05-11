@@ -1,7 +1,13 @@
 <h2><%= @contractor.full_name %> (<%= @contractor.email %>)</h2>
 
-<h4>Please fill in information for the following voters:</h4>
+<h4>Please fill in information for the following voters</h4>
 
-<% for voter in @contractor.voters %>
-  <p><%= voter.full_name %> - <%= voter.address %></p>
+<% for vgi in @contractor.voter_gathered_infos.order(:id) %>
+  <%= form_tag(update_voter_info_path(vgi_id: vgi.id), method: 'post', remote: true) do %>
+    <p>
+      <%= vgi.voter.full_name %> - <%= vgi.voter.address %>
+      &nbsp; &nbsp;<%= text_field_tag :email, vgi.email, { class: :email, vgi_id: vgi.id } %>
+      &nbsp;<%= submit_tag "Save" %>
+    </p>
+  <% end %>
 <% end %>

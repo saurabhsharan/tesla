@@ -26,4 +26,18 @@ class ContractorsController < ApplicationController
       redirect_to action: :index
     end
   end
+  
+  def update_voter_info
+    contractor = Contractor.where(id: session[:contractor_id]).first
+    vgi = contractor.voter_gathered_infos.where(id: params[:vgi_id])
+    
+    if vgi.empty?
+      render json: { error: "Invalid vgi_id" }
+    else
+      vgi = vgi.first
+      vgi.email = params[:email]
+      vgi.save
+      render nothing: true, status: :ok
+    end
+  end
 end

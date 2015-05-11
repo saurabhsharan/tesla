@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'contractors#index'
   post 'contractors/login' => 'contractors#login', as: :contractor_login
+  post 'contractors/update_voter_info/:vgi_id' => 'contractors#update_voter_info', as: :update_voter_info
   
   get 'admin' => 'admin#index'
   get 'admin/contractors/:contractor_id' => 'admin#view_contractor', as: :view_contractor
