@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   root 'contractors#index'
   post 'contractors/login' => 'contractors#login', as: :contractor_login
+  
+  get 'admin' => 'admin#index'
+  post 'admin/login' => 'admin#login', as: :admin_login
+  post 'admin/create_contractor' => 'admin#create_contractor', as: :create_contractor
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

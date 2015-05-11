@@ -1,7 +1,7 @@
 class ContractorsController < ApplicationController
   def index
     if session[:contractor_id]
-      @contractor = Contractor.where(session[:contractor_id]).first
+      @contractor = Contractor.where(id: session[:contractor_id]).first
     else
       render :login
     end
