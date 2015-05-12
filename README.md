@@ -14,3 +14,4 @@ TODO
 * Be able to add/remove voters to contractor after contractor has been created
 * Download CSV data file
 * Let admins resolve email address conflicts
+* Improve UI for contractors to input emails, e.g. auto-save
